@@ -9,6 +9,7 @@ setopt extended_glob
 BLUE='\033[0;34m'
 NC='\033[0m' # no color
 
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 CONFIG_FILE="$(dirname "$0")/.raycast-tab-config"
 DEFAULT_UTILS_DIR="$HOME/.my-raycast-tools"
 
@@ -34,7 +35,7 @@ get_utils_dir() {
                 UTILS_DIR=""
                 while [[ -z $UTILS_DIR ]]; do
                     echo -ne "${BLUE}Enter your preferred directory path: ${NC}"
-                    vared -p "" UTILS_DIR
+                    read UTILS_DIR
                 done
                 ;;
         esac
@@ -95,8 +96,6 @@ case "$CHOICE" in
         ;;
 esac
 
-echo -e "${BLUE}🔨 Making \"Get Tab: $WEBSITE_NAME\" script in \"$UTILS_DIR\"${NC}"
-./make-get-tab-script.sh "$UTILS_DIR" "$WEBSITE_NAME" "$URL" "$URL_QUERY"
+echo -e "${BLUE}🔨 Making ${NC}\"Get Tab: $WEBSITE_NAME\"${BLUE} script in \"$UTILS_DIR\"${NC}"
+"${SCRIPT_DIR}"/make-get-tab-script.sh "$UTILS_DIR" "$WEBSITE_NAME" "$URL" "$URL_QUERY"
 echo -e "${BLUE}✅ Complete. You now have the Raycast Script Command${NC} \"🌐 Get Tab: $WEBSITE_NAME\"."
-
-
