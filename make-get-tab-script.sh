@@ -8,9 +8,9 @@ URL="$3"
 URL_QUERY="$4"
 
 if [[ -z $RAYCAST_SCRIPT_DIR || -z $WEBSITE_NAME || -z $URL || -z $URL_QUERY ]]; then
-  echo "usage: $0 {Script_Directory} {Website_Name} {URL} {URL_Query} "
+  echo "usage: $0 {Script_Directory} {Website_Name} {URL} {URL_Query}"
   echo ""
-  echo "{Script_Directory} (e.g. \"~/.my-raycast-tools\"): The path to your raycast scripts directory. This is where this script will generate your new \"get-tab-_.sh\" script."
+  echo "{Script_Directory} (e.g. \"Users/yourname/.my-raycast-tools\"): The path to your raycast scripts directory. This is where this script will generate your new \"get-tab-_.sh\" script."
   echo "{Website Name} (e.g. \"YouTube Shorts\"):          The \"proper name\" of the website. Used to title your generated zsh script and Raycast Script Command."
   echo "{URL} (e.g. \"https://www.youtube.com/shorts\"):   The URL to open when no tab matching the query is found."
   echo "{URL_Query} (e.g. \"youtube.com/shorts\"):         The URL substring to search for when finding an existing tab."

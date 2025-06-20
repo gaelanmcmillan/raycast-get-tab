@@ -2,7 +2,7 @@
 
 # Required parameters:
 # @raycast.schemaVersion 1
-# @raycast.title Get Tab: Gemini
+# @raycast.title Get Tab: Gmail
 # @raycast.mode silent
 
 # Optional parameters:
@@ -13,6 +13,6 @@
 # @raycast.author gmcm
 # @raycast.authorURL https://github.com/gaelanmcmillan
 
-URL="https://gemini.google.com/"
-URL_QUERY="gemini.google.com"
-osascript open-chrome-tab.applescript $URL $URL_QUERY
+URL="https://mail.google.com/"
+URL_QUERY="mail.google.com"
+osascript ../open-chrome-tab.applescript $URL $URL_QUERY

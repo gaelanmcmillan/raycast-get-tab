@@ -1,72 +1,128 @@
-# Raycast "Get Tab: \_\_\_"
+Raycast "Get Tab"
 
-Find or open a Chrome tab via Raycast.
+These are the scripts I use to open and focus Chrome tabs in the same way I open desktop apps, using Raycast.
+
+<details>
+<summary>How I use these scripts</summary>
+
+Prior to getting these scripts together, my Raycast-hotkeyed apps were the following:
+
+| App    | Hotkey |
+| ------ | ------ |
+| VSCode | ⌃ ⇧ C  |
+| Slack  | ⌃ ⇧ S  |
+| Chrome | ⌃ ⇧ W  |
+
+(I copied this workflow from [Roger (rog22rz)](https://github.com/rog22rz). Thanks Roger!)
+
+When I opened Chrome, I would almost always looking for a tab I already had open. So, I would either...
+
+1. Open a new tab and navigate to my destination, probably making a duplicate tab, or ...
+2. Use Chrome's _Search Tabs..._ (⌘ ⇧ A) to find an existing tab, if muscle memory didn't already take over, or...
+3. Grab my mouse and scan across the tab bar, which was invariably so overpopulated with dupes that the best I could do was pick out a familiar favicon.
+
+![tabs on tabs on tabs](screenshots/tabs-tabs-tabs.png)
+_The humanity..._
+
+When one's work revolves around many web-based tools, the lack of _Spotlight_-like access to these apps is sorely missed.
+
+That's where these scripts come in. Rather than hotkeying Chrome and following the choreography above, I have just about every letter accessible to my left index finger mapped to a different (url to open, url to search) pair that I can use to either find or open a tab to a given website.
+
+Here are some of my favourites:
+
+| Site                       | Hotkey |                                                                                                                             |
+| -------------------------- | ------ | --------------------------------------------------------------------------------------------------------------------------- |
+| My current design document | ⌃ ⇧ D  | Great to have this on a hotkey during the research-write cycle.                                                             |
+| ChatGPT                    | ⌃ ⇧ G  | One of my most oft-duplicated tabs.                                                                                         |
+| SSO Dashboard              | ⌃ ⇧ Q  | _The_ most oft-duplicated tab.                                                                                              |
+| Google Meet                | ⌃ ⇧ X  | This one's particularly handy, especially if you have multiple chrome windows stacked on top of eachother during a meeting. |
+
+That's it, really! If web apps are taking the place of desktop apps, I wanna be able to open them with the same convenience.
+
+Hope you can get some use out of these, too.
+
+</details>
 
 ## Overview
 
-This project provides a set of scripts that integrate with Raycast to let you open Chrome tabs like you open standalone apps.
+This project is really just three scripts:
 
-- **`open-chrome-tab.applescript`**: the generic utility responsible for finding/opening Chrome tabs
-- **`make-get-tab-script.sh`**: a script for making the actual \_Get Tab: \_\_\__ Raycast commands that call \_open-chrome-tab.applescript_
-- **`make-get-tab-wizard.sh`**: an interactive utility for making \_Get Tab: \_\_\_\_ commands. Easier to use than the aforementioned script.
+1. **`open-chrome-tab.applescript`**: an osascript utility that finds/opens Chrome tabs given a `url` and `urlQuery`.
+2. **`make-get-tab-script.sh`**: a script that stamps out more scripts to invoke (1) and are annotated such that Raycast recognizes them as [Script Commands](https://www.raycast.com/blog/getting-started-with-script-commands).
+3. **`make-get-tab-wizard.sh`**: an interactive utility that invokes (2), making it a little easier to create and manage these scripts.
 
 ## Prerequisites
 
 - [Raycast](https://www.raycast.com/)
-- Chrome
-- zsh
+- Google Chrome (while I haven't tried, I imagine you could adapt `open-chrome-tab.applescript` to work with other browsers...)
+- zsh (the default on MacOS, anyway)
 
 ## Setup
 
 1. Clone this repository:
 
    ```bash
-   git clone https://github.com/yourusername/raycast_get_tab.git
-   cd raycast_get_tab
+   git clone https://github.com/yourusername/raycast-get-tab.git
+   cd raycast-get-tab
    ```
 
 ## Usage
 
-I've included a couple sample "Get Tab: \_" commands:
+I've included a couple sample "Get Tab" commands:
 
-- Get Tab: Gmail (`get-tab-gmail.sh`)
-- Get Tab: Gemini (`get-tab-gemini.sh`)
+- Get Tab: Gmail (`examples/get-tab-gmail.sh`)
+- Get Tab: Gemini (`examples/get-tab-gemini.sh`)
 
-To use them, you'll need to add this directory to your list of Raycast Script Command directories.
+These are just zsh scripts with special comment that let Raycast recognize it as a Script Command.
 
-Once you've done that, find the commands via the Raycast menu, or setup a hotkey!
+> [!NOTE]
+> For these scripts to appear in your Raycast menu, you'll need to [add the `examples/` directory](#adding-raycast-script-command-directories) to your list of Raycast Script Command directories.
 
-## Creating New "Get Tab: \_\_\_" Commands
+Once you've done that, find the commands via the Raycast menu, or setup a hotkey.
 
-### Via the Wizard Script (recommended)
+## Creating New "Get Tab" Commands
 
-1. Make the wizard script executable.
+### Via script
 
-   ```bash
-   # In the `raycast_get_tab` directory
-   chmod +x make-get-tab-wizard.sh
-   ```
+```bash
+./make-get-tab-script.sh {Script_Directory} {Website_Name} {URL} {URL_Query}
+```
 
-2. Run the wizard, which will prompt you to specify your Raycast script commands directory.
+- `Script_Directory` — The path to your raycast scripts directory. This is where this script will generate your new \"get-tab-\*.sh\" script."
+- `Website_Name` — The "proper name" of the website, e.g. "Youtube Shorts". Used to title your generated zsh script and Raycast Script Command.
+- `URL` — The URL to open when no tab matching the query is found, e.g. "https://www.youtube.com/shorts"
+- `URL_Query` — The URL substring to search for when finding an existing tab, e.g. "youtube.com/shorts".
 
-   _Tip: make an alias in your .zshrc/.bashrc like `alias gettabwizard="/path/to/make-get-tab-wizard.sh"_
+### Via the Wizard (recommended)
 
-   ```bash
-   ./make-get-tab-wizard.sh
-   ```
+Run the wizard and follow the prompts.
 
-   e.g. ![example usage](./wizard-example.png)
+```bash
+./make-get-tab-wizard.sh
+```
 
-3. In Raycast, set your Raycast Script Command directory
+#### Wizard Example
 
-   You need to configure Raycast to search your scripts directory.
+![example usage](screenshots/wizard-example.png)
 
-   If you didn't set your existing Script Command directory in the Wizard, or you have never set up a Script Command directory, you will need to do so before your commands are recognized.
+> [!NOTE]
+> If you plan on making lots of "Get Tab" commands, make a zsh alias for the wizard.
 
-   Go to `Raycast > Settings (⌘+,) > Extensions > Scripts > Add Directories`, then select the script directory you specified in the wizard.
-
-   **Now your "Get Tab: \_\_\_" commands should be runnable from Raycast!**
+```bash
+# inside .zshrc
+alias raycast-get-tab="/PATH/TO/raycast-get-tab/make-get-tab-wizard.sh"`
+```
 
 ---
 
-Shoutout to [Roger (rog22rz)](https://github.com/rog22rz) and [Reme (xreme)](https://github.com/xreme) for putting me onto Raycast!
+## Adding Raycast Script Command directories
+
+By default, Raycast will not search your computer for Script Commands.
+
+Go to `Raycast > Settings (⌘+,) > Extensions > Scripts > Add Directories`, then select the script directory you specified in the wizard.
+
+**Now your "Get Tab" Script Commands should be runnable from Raycast.**
+
+---
+
+Shout-out to [Reme (xreme)](https://github.com/xreme) for putting me onto Raycast!
