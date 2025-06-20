@@ -1,9 +1,11 @@
-Raycast "Get Tab"
+# Raycast "Get Tab"
 
 These are the scripts I use to open and focus Chrome tabs in the same way I open desktop apps, using Raycast.
 
 <details>
 <summary>How I use these scripts</summary>
+
+I like having my most used apps on hotkeys.
 
 Prior to getting these scripts together, my Raycast-hotkeyed apps were the following:
 
@@ -15,7 +17,7 @@ Prior to getting these scripts together, my Raycast-hotkeyed apps were the follo
 
 (I copied this workflow from [Roger (rog22rz)](https://github.com/rog22rz). Thanks Roger!)
 
-When I opened Chrome, I would almost always looking for a tab I already had open. So, I would either...
+When I pressed my Chrome hotkey, I would almost always looking for a tab I already had open. So, I would either...
 
 1. Open a new tab and navigate to my destination, probably making a duplicate tab, or ...
 2. Use Chrome's _Search Tabs..._ (⌘ ⇧ A) to find an existing tab, if muscle memory didn't already take over, or...
@@ -26,7 +28,7 @@ _The humanity..._
 
 When one's work revolves around many web-based tools, the lack of _Spotlight_-like access to these apps is sorely missed.
 
-That's where these scripts come in. Rather than hotkeying Chrome and following the choreography above, I have just about every letter accessible to my left index finger mapped to a different (url to open, url to search) pair that I can use to either find or open a tab to a given website.
+That's where these scripts come in. Rather than hotkeying Chrome and following the choreography above, I have just about every letter accessible to my left index finger mapped to a different $(urlToOpen, urlToSearch)$ pair that I can use to either find or open a tab to a given website.
 
 Here are some of my favourites:
 
@@ -48,7 +50,7 @@ Hope you can get some use out of these, too.
 This project is really just three scripts:
 
 1. **`open-chrome-tab.applescript`**: an osascript utility that finds/opens Chrome tabs given a `url` and `urlQuery`.
-2. **`make-get-tab-script.sh`**: a script that stamps out more scripts to invoke (1) and are annotated such that Raycast recognizes them as [Script Commands](https://www.raycast.com/blog/getting-started-with-script-commands).
+2. **`make-get-tab-script.sh`**: a script that stamps out more scripts to invoke (1) (with annotations such that Raycast recognizes them as [Script Commands](https://www.raycast.com/blog/getting-started-with-script-commands)).
 3. **`make-get-tab-wizard.sh`**: an interactive utility that invokes (2), making it a little easier to create and manage these scripts.
 
 ## Prerequisites
@@ -75,10 +77,10 @@ I've included a couple sample "Get Tab" commands:
 
 These are just zsh scripts with special comment that let Raycast recognize it as a Script Command.
 
-> [!NOTE]
+> [!IMPORTANT]
 > For these scripts to appear in your Raycast menu, you'll need to [add the `examples/` directory](#adding-raycast-script-command-directories) to your list of Raycast Script Command directories.
-
-Once you've done that, find the commands via the Raycast menu, or setup a hotkey.
+> 
+> Once you've done that, find the commands via the Raycast menu, or setup a hotkey.
 
 ## Creating New "Get Tab" Commands
 
@@ -105,23 +107,22 @@ Run the wizard and follow the prompts.
 
 ![example usage](screenshots/wizard-example.png)
 
-> [!NOTE]
+> [!TIP]
 > If you plan on making lots of "Get Tab" commands, make a zsh alias for the wizard.
-
-```bash
-# inside .zshrc
-alias raycast-get-tab="/PATH/TO/raycast-get-tab/make-get-tab-wizard.sh"`
-```
+> 
+> ```bash
+> # inside .zshrc
+> alias raycast-get-tab="/PATH/TO/raycast-get-tab/make-get-tab-wizard.sh"`
+> ```
 
 ---
-
 ## Adding Raycast Script Command directories
-
-By default, Raycast will not search your computer for Script Commands.
-
-Go to `Raycast > Settings (⌘+,) > Extensions > Scripts > Add Directories`, then select the script directory you specified in the wizard.
-
-**Now your "Get Tab" Script Commands should be runnable from Raycast.**
+> [!IMPORTANT]
+> By default, Raycast will not search your computer for Script Commands.
+>
+> Go to `Raycast > Settings (⌘+,) > Extensions > Scripts > Add Directories`, then select the script directory you specified in the wizard.
+>
+> **Now your "Get Tab" Script Commands should be runnable from Raycast.**
 
 ---
 
