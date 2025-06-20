@@ -73,7 +73,7 @@ get_utils_dir() {
     fi
 }
 
-echo -e "${BLUE}🧙 Welcome to the Raycast \"Get Tab: ___\" Script Command Wizard${NC}"
+echo -e "${BLUE}🧙 Welcome to the Raycast \"Get Tab\" Script Command Wizard${NC}"
 echo ""
 echo "This tool guides you through the process of creating a new Script Command for Raycast that will find or open a Google Chrome tab for you."
 echo "Tip: Once you've created your Script Command, you can set a shortcut for it in Raycast."
@@ -102,3 +102,5 @@ esac
 echo -e "${BLUE}🔨 Making ${NC}\"Get Tab: $WEBSITE_NAME\"${BLUE} script in \"$UTILS_DIR\"${NC}"
 "${SCRIPT_DIR}"/make-get-tab-script.sh "$UTILS_DIR" "$WEBSITE_NAME" "$URL" "$URL_QUERY"
 echo -e "${BLUE}✅ Complete. You now have the Raycast Script Command${NC} \"🌐 Get Tab: $WEBSITE_NAME\"."
+echo ""
+echo -e "${RED}❗ Don't forget to add \"${UTILS_DIR}\" to your list of Raycast Script Commands directories!"
